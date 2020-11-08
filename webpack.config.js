@@ -18,7 +18,9 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: [".tsx",".ts", ".jsx", ".js", ".css"] },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+  },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
@@ -26,8 +28,8 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, "public/"),
-    port: 8080,
-    publicPath: "http://localhost:8080/dist/",
+    port: 8000,
+    publicPath: "http://localhost:8000/dist/",
     hotOnly: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]

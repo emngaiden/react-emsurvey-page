@@ -9,6 +9,7 @@
       "experimentalDecorators": true,
       "removeComments": false,
       "noImplicitAny": false,
+      "declaration": true,
       "suppressImplicitAnyIndexErrors": true,
       "outDir": "dist",
       "lib": ["es2015", "es2017", "dom"],
@@ -16,7 +17,6 @@
       "types": ["webpack-env"],
       "allowJs": true,
       "checkJs": false,
-      "baseUrl": "./",
       "importHelpers": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true

@@ -1,0 +1,21 @@
+{
+    "apiSettings":{
+        "api": {
+            "main": {
+                "url": "https://cat-fact.herokuapp.com/",
+                "endpoints": {
+                    "facts": {
+                        "path": "facts",
+                        "args": [
+                            "_id"
+                        ],
+                        "methods": [
+                            "post",
+                            "get"
+                        ]
+                    }
+                }
+            }
+        }   
+    }
+}

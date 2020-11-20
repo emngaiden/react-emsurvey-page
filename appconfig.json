@@ -2,7 +2,7 @@
     "apiSettings":{
         "api": {
             "main": {
-                "url": "https://cat-fact.herokuapp.com/",
+                "url": "https://cat-fact.herokuapp.com",
                 "endpoints": {
                     "facts": {
                         "path": "facts",

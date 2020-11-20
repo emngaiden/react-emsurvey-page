@@ -3,6 +3,7 @@ import { IApi } from 'src/shared/model/api.model';
 import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
 import { getApiData, getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/appsettings-utils';
 import { ILanguage } from 'src/shared/model/language.model';
+import { buildApiUrl } from 'src/shared/utils/app-utils';
 
 const initialState = {
     data: 0,
@@ -100,10 +101,15 @@ export const reset = () => ({
     type: ACTION_TYPES.RESET
 });
 
-export const requestApi = () => ({
-    type: ACTION_TYPES.REQUEST_API,
-    payload: axios.get('https://cat-fact.herokuapp.com/facts')
-});
+export const requestApi = () => {
+    const apiData = getApiData('main');
+    
+    return {
+        type: ACTION_TYPES.REQUEST_API,
+        payload: axios.get(buildApiUrl(apiData, 'facts'))
+    }
+    
+};
 
 export const readAppSettings = () => ({
     type: ACTION_TYPES.READ_API_SETTINGS,

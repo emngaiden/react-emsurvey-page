@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'src/shared/reducers';
-import { decreaseData, increaseData, reset, requestApi, readAppSettings } from 'src/shared/reducers/basic';
+import { decreaseData, increaseData, reset, requestApi, readAppSettings, readDefaultLanguage, readLanguages } from 'src/shared/reducers/basic';
 
 interface IStartProps extends StateProps, DispatchProps{}
 
@@ -26,20 +26,51 @@ class Start extends React.Component<IStartProps> {
                         api
                     </button>
                     <button onClick={this.props.readAppSettings}>
-                        appsettings
+                        main api
+                    </button>
+                    <button onClick={this.props.readLanguages}>
+                        languages
+                    </button>
+                    <button onClick={this.props.readDefaultLanguage}>
+                        defaultLanguage
                     </button>
                 </div>
                 <div>
                     {this.props.loading && ('Loading')}
-                    {this.props.apiData !== undefined && this.props.apiData.toString()}
-                    {this.props.error !== undefined && this.props.error.toString()}
+                    {this.props.apiData !== undefined && <div>DATA FROM API: {this.props.apiData.toString()}</div>}
+                    {this.props.error !== undefined && <div>ERROR:{this.props.error.toString()}</div>}
                     {this.props.appSettings !== undefined ? (
-                        <pre>
-                            Name: {this.props.appSettings.name}
-                            <br />
-                            Url: {this.props.appSettings.url}
-                        </pre>
+                        <div>
+                            MAIN API
+                            <pre>
+                                Name: {this.props.appSettings.name}
+                                <br />
+                                Url: {this.props.appSettings.url}
+                            </pre>
+                        </div>
                     ) : (<></>)}
+                    {this.props.defaultLanguage !== undefined ? (
+                        <div>
+                            DEFAULT LANGUAGE:
+                            <pre>
+                                Language key: {this.props.defaultLanguage.key}
+                                <br />
+                                Language name: {this.props.defaultLanguage.name}
+                            </pre>
+                        </div>
+                    ): (<></>)}
+                    {this.props.languages !== undefined && this.props.languages.length > 0? (
+                        <div>
+                            LANGUAGES:
+                            {this.props.languages.map(element => (
+                                <pre key={element.key}>
+                                    Language key: {element.key}
+                                    <br />
+                                    Language name: {element.name}
+                                </pre>
+                            ))}
+                        </div>
+                    ): (<></>)}
                 </div>
             </div>
         );
@@ -51,7 +82,9 @@ const mapStateToProps = (state: IRootState) => ({
     apiData: state.basic.apiData,
     loading: state.basic.loading,
     error: state.basic.error,
-    appSettings: state.basic.apiSettingsData
+    appSettings: state.basic.apiSettingsData,
+    languages: state.basic.languages,
+    defaultLanguage: state.basic.defaultLanguage
 });
 
 const mapDispatchToProps = {
@@ -59,7 +92,9 @@ const mapDispatchToProps = {
     increaseData,
     reset,
     requestApi,
-    readAppSettings
+    readAppSettings,
+    readDefaultLanguage,
+    readLanguages
 }
 
 type StateProps = ReturnType<typeof mapStateToProps>;

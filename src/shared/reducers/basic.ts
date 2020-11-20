@@ -1,14 +1,17 @@
 import axios from 'axios';
 import { IApi } from 'src/shared/model/api.model';
 import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
-import { getApiData } from 'src/shared/utils/appsettings-utils';
+import { getApiData, getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/appsettings-utils';
+import { ILanguage } from 'src/shared/model/language.model';
 
 const initialState = {
     data: 0,
     loading: false,
     apiData: undefined,
     error: undefined as string,
-    apiSettingsData: undefined as IApi
+    apiSettingsData: undefined as IApi,
+    languages: undefined as ILanguage[],
+    defaultLanguage: undefined as ILanguage
 };
 
 export type BasicState = Readonly<typeof initialState>;
@@ -18,7 +21,9 @@ export const ACTION_TYPES = {
     DECREASE_DATA: "basic/decrease_data",
     RESET: "basic/reset",
     REQUEST_API: "basic/request_api",
-    READ_API_SETTINGS: "basic/reap_api_settings"
+    READ_API_SETTINGS: "basic/reap_api_settings",
+    READ_LANGUAGES: "basic/read_languages",
+    READ_DEFAULT_LANGUAGE: "basic/read_default_language"
 }
 
 export default (state: BasicState = initialState, action): BasicState => {
@@ -43,6 +48,18 @@ export default (state: BasicState = initialState, action): BasicState => {
                 error: undefined,
                 loading: false,
                 apiData: action.payload
+            }
+        }
+        case ACTION_TYPES.READ_LANGUAGES: {
+            return {
+                ...state,
+                languages: action.payload
+            }
+        }
+        case ACTION_TYPES.READ_DEFAULT_LANGUAGE: {
+            return {
+                ...state,
+                defaultLanguage: action.payload
             }
         }
         case ACTION_TYPES.READ_API_SETTINGS: {
@@ -92,3 +109,13 @@ export const readAppSettings = () => ({
     type: ACTION_TYPES.READ_API_SETTINGS,
     payload: getApiData('main')
 });
+
+export const readLanguages = () => ({
+    type: ACTION_TYPES.READ_LANGUAGES,
+    payload: getAvailableLanguages()
+});
+
+export const readDefaultLanguage = () => ({
+    type: ACTION_TYPES.READ_DEFAULT_LANGUAGE,
+    payload: getDefaultLanguage()
+})

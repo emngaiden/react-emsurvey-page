@@ -19,9 +19,17 @@
         }   
     },
     "translationSettings": {
-        "languages": [
-            "en",
-            "es"
-        ]
+        "languages": {
+            "en": {
+                "key": "en",
+                "name": "English"
+            },
+            "es": {
+                "key": "es",
+                "name": "Español"
+            }
+        },
+        "path": "src/i18n/",
+        "default": "en"
     }
 }

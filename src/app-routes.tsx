@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router';
 import { Switch } from 'react-router-dom';
+import ErrorCatchingRoute from './config/error/error-catching-route';
 import Start from "./modules/start";
 
 const Routes = () => (
   <div className="view-routes">
     <Switch>
-      <Route path="/" exact component={Start} />
-      <Route component={Start} />
+      <ErrorCatchingRoute path="/" exact component={Start} />
+      <ErrorCatchingRoute component={Start} />
     </Switch>
   </div>
 );

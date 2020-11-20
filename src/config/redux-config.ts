@@ -1,7 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import ThunkMiddleware from 'redux-thunk';
+import loggerMiddleware from './middlewares/logger-middleware';
 import reducer, {IRootState} from '../shared/reducers';
+import promiseMiddleware from 'redux-promise-middleware'
+import errorMiddleware from './middlewares/error-middleware';
 
 const defaultMiddlewares = [
+  ThunkMiddleware,
+  errorMiddleware,
+  promiseMiddleware,
+  loggerMiddleware
 ];
 
 const composedMiddlewares = middlewares =>

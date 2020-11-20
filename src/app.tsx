@@ -2,7 +2,7 @@ import React, { Component} from "react";
 import {hot} from "react-hot-loader";
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './app-routes';
-import "./App.css";
+import './app.css';
 
 const baseHref = document
   .querySelector('base')
@@ -11,9 +11,11 @@ const baseHref = document
 
 const App = props => {
   return(
-    <Router basename={baseHref} >
-      <Routes />
-    </Router>
+    <div className="app-container">
+      <Router basename={baseHref} >
+        <Routes />
+      </Router>
+    </div>
   );
 }
 

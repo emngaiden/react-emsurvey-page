@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IRootState } from '../shared/reducers';
-import { decreaseData, increaseData, reset, requestApi, readAppSettings } from '../shared/reducers/basic';
-import { getApiData } from '../shared/utils/appsettings-utils';
+import { IRootState } from 'src/shared/reducers';
+import { decreaseData, increaseData, reset, requestApi, readAppSettings } from 'src/shared/reducers/basic';
 
 interface IStartProps extends StateProps, DispatchProps{}
 

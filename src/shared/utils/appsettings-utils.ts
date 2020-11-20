@@ -1,5 +1,5 @@
-import { IApiEndpoint } from '../model/api-endpoint.model';
-import { IApi } from '../model/api.model';
+import { IApiEndpoint } from 'src/shared/model/api-endpoint.model';
+import { IApi } from 'src/shared/model/api.model';
 
 const appconfig = require('../../../appconfig.json');
 

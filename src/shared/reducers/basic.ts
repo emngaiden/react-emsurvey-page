@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { IApi } from '../model/api.model';
+import { IApi } from 'src/shared/model/api.model';
 import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
-import { getApiData } from '../utils/appsettings-utils';
+import { getApiData } from 'src/shared/utils/appsettings-utils';
 
 const initialState = {
     data: 0,

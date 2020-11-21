@@ -1,38 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'src/shared/reducers';
-import { decreaseData, increaseData, reset, requestApi, readAppSettings, readDefaultLanguage, readLanguages } from 'src/shared/reducers/basic';
+import { decreaseData, increaseData, reset, requestApi, readAppSettings, readDefaultLanguage, readLanguages, switchLocale } from './demo.reducer';
+import { translate } from 'src/shared/utils/translation/translation';
 
-interface IStartProps extends StateProps, DispatchProps{}
+interface IDemoProps extends StateProps, DispatchProps{}
 
-class Start extends React.Component<IStartProps> {
+class Demo extends React.Component<IDemoProps> {
     render() {
         return(
             <div>
                 <div>
                     <h1>
-                        hello world {this.props.data} times
+                        {translate('demo.helloWorld', { n: this.props.data, lname: this.props.language })}
                     </h1>
                     <button onClick={this.props.increaseData}>
-                        increase
+                        {translate('demo.increase')}
                     </button>
                     <button onClick={this.props.decreaseData}>
-                        decrease
+                        {translate('demo.decrease')}
                     </button>
                     <button onClick={this.props.reset}>
-                        reset
+                        {translate('demo.reset')}
                     </button>
                     <button onClick={this.props.requestApi}>
-                        api
+                        {translate('demo.callApi')}
                     </button>
                     <button onClick={this.props.readAppSettings}>
-                        main api
+                        {translate('demo.mainApi')}
                     </button>
                     <button onClick={this.props.readLanguages}>
-                        languages
+                        {translate('demo.languages')}
                     </button>
                     <button onClick={this.props.readDefaultLanguage}>
-                        defaultLanguage
+                        {translate('demo.defaultLanguage')}
+                    </button>
+                    <button onClick={this.props.switchLocale}>
+                        {translate('demo.switchLanguage')}
                     </button>
                 </div>
                 <div>
@@ -78,13 +82,14 @@ class Start extends React.Component<IStartProps> {
 }
 
 const mapStateToProps = (state: IRootState) => ({
-    data: state.basic.data,
-    apiData: state.basic.apiData,
-    loading: state.basic.loading,
-    error: state.basic.error,
-    appSettings: state.basic.apiSettingsData,
-    languages: state.basic.languages,
-    defaultLanguage: state.basic.defaultLanguage
+    data: state.demo.data,
+    apiData: state.demo.apiData,
+    loading: state.demo.loading,
+    error: state.demo.error,
+    appSettings: state.demo.apiSettingsData,
+    languages: state.demo.languages,
+    defaultLanguage: state.demo.defaultLanguage,
+    language: state.locale.languageName
 });
 
 const mapDispatchToProps = {
@@ -94,10 +99,11 @@ const mapDispatchToProps = {
     requestApi,
     readAppSettings,
     readDefaultLanguage,
-    readLanguages
+    readLanguages,
+    switchLocale
 }
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Start);
+export default connect(mapStateToProps, mapDispatchToProps)(Demo);

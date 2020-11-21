@@ -5,7 +5,7 @@ import { IApi } from 'src/shared/model/api.model';
 const appconfig = require('../../../appconfig.json');
 
 export function getApiData(apiName: string): IApi {
-    const r = validateAppSettings(['apiSettings', 'api', apiName]);
+    const r = validateAppSettings(true, 'apiSettings', 'api', apiName);
     const endpoints: IApiEndpoint[] = [];
     Object.keys(r.endpoints).forEach(key => {
         const value = r.endpoints[key]
@@ -25,7 +25,7 @@ export function getApiData(apiName: string): IApi {
 }
 
 export function getAllApiData(): IApi[] {
-    const r = validateAppSettings(['apiSettings', 'api']);
+    const r = validateAppSettings(true, 'apiSettings', 'api');
     const ret: IApi[] = [];
     Object.keys(r).forEach(k => {
         ret.push(getApiData(k));
@@ -34,7 +34,7 @@ export function getAllApiData(): IApi[] {
 }
 
 export function getAvailableLanguages(): ILanguage[] {
-    const r = validateAppSettings(['translationSettings', 'languages']);
+    const r = validateAppSettings(true, 'localeSettings', 'languages');
     const ret = [];
     Object.keys(r).forEach(k => {
         ret.push(r[k]);
@@ -43,12 +43,18 @@ export function getAvailableLanguages(): ILanguage[] {
 }
 
 export function getDefaultLanguage(): ILanguage {
-    const r = validateAppSettings(['translationSettings', 'default'], false);
+    const r = validateAppSettings(false, 'localeSettings', 'default');
     if(r === undefined) return undefined;
-    return validateAppSettings(['translationSettings', 'languages'])[r];
+    return validateAppSettings(true, 'localeSettings', 'languages')[r];
 }
 
-function validateAppSettings(other = [], throwErrorOnDeep = true): any {
+export function getLanguage(key: string): ILanguage {
+    const r = validateAppSettings(false, 'localeSettings', 'languages', key)
+    if(r === undefined) return undefined
+    return r;
+}
+
+function validateAppSettings(throwErrorOnDeep, ...other: string[]): any {
     let d = appconfig;
     if (d === undefined) {
         throw new Error("No appconfig.json file found in project root directory.");

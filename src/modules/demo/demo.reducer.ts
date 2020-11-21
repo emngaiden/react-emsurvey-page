@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { IApi } from 'src/shared/model/api.model';
-import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
+import { FAILURE, REQUEST, SUCCESS } from 'src/shared/reducers/action-type.utils';
 import { getApiData, getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/appsettings-utils';
 import { ILanguage } from 'src/shared/model/language.model';
 import { buildApiUrl } from 'src/shared/utils/app-utils';
+import { ACTION_TYPES as LOCALE_ACTION_TYPES } from 'src/shared/reducers/locale.reducer';
 
 const initialState = {
     data: 0,
@@ -15,19 +16,19 @@ const initialState = {
     defaultLanguage: undefined as ILanguage
 };
 
-export type BasicState = Readonly<typeof initialState>;
+export type DemoState = Readonly<typeof initialState>;
 
 export const ACTION_TYPES = {
-    INCREASE_DATA: "basic/increase_data",
-    DECREASE_DATA: "basic/decrease_data",
-    RESET: "basic/reset",
-    REQUEST_API: "basic/request_api",
-    READ_API_SETTINGS: "basic/reap_api_settings",
-    READ_LANGUAGES: "basic/read_languages",
-    READ_DEFAULT_LANGUAGE: "basic/read_default_language"
+    INCREASE_DATA: "demo/increase_data",
+    DECREASE_DATA: "demo/decrease_data",
+    RESET: "demo/reset",
+    REQUEST_API: "demo/request_api",
+    READ_API_SETTINGS: "demo/reap_api_settings",
+    READ_LANGUAGES: "demo/read_languages",
+    READ_DEFAULT_LANGUAGE: "demo/read_default_language",
 }
 
-export default (state: BasicState = initialState, action): BasicState => {
+export default (state: DemoState = initialState, action): DemoState => {
     switch(action.type) {
         case REQUEST(ACTION_TYPES.REQUEST_API): {
             return {
@@ -124,4 +125,17 @@ export const readLanguages = () => ({
 export const readDefaultLanguage = () => ({
     type: ACTION_TYPES.READ_DEFAULT_LANGUAGE,
     payload: getDefaultLanguage()
-})
+});
+
+export const switchLocale = () => (dispatch, getState) => {
+    const actualLanguageKey = getState().locale.languageKey;
+    const languages = getAvailableLanguages();
+    let item = languages[Math.floor(Math.random() * languages.length)];
+    while(item.key === actualLanguageKey) {
+        item = languages[Math.floor(Math.random() * languages.length)];
+    };
+    return dispatch({
+        type: LOCALE_ACTION_TYPES.SET_LOCALE,
+        payload: item
+    });
+};

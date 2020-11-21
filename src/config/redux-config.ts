@@ -12,6 +12,8 @@ const defaultMiddlewares = [
   loggerMiddleware
 ];
 
+export let store;
+
 const composedMiddlewares = middlewares =>
   process.env.NODE_ENV === 'development'
     ? compose(
@@ -20,6 +22,9 @@ const composedMiddlewares = middlewares =>
       )
     : compose(applyMiddleware(...defaultMiddlewares, ...middlewares));
 
-const initialize = (initialState?: IRootState, middlewares = []) => createStore(reducer, initialState, composedMiddlewares(middlewares));
+const initialize = (initialState?: IRootState, middlewares = []) => {
+  store = createStore(reducer, initialState, composedMiddlewares(middlewares));
+  return store;
+};
 
 export default initialize;

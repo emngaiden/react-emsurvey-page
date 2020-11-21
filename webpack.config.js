@@ -4,6 +4,7 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.tsx",
   mode: "development",
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -29,6 +30,7 @@ module.exports = {
     contentBase: path.join(__dirname, "public/"),
     port: 8000,
     publicPath: "http://localhost:8000/dist/",
+    historyApiFallback: true,
     hotOnly: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]

@@ -1,0 +1,13 @@
+{
+    "demo": {
+        "helloWorld": "Hello world {%n%} times in {%lname%}",
+        "increase": "Increase",
+        "decrease": "Decrease",
+        "reset": "Reset",
+        "callApi": "Call API",
+        "mainApi": "Main APÏ data",
+        "languages": "Available languages",
+        "defaultLanguage": "Default language",
+        "switchLanguage": "Switch language"
+    }   
+}

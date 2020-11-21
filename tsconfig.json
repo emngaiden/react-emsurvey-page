@@ -17,7 +17,7 @@
       "suppressImplicitAnyIndexErrors": true,
       "outDir": "dist",
       "lib": ["es2015", "es2017", "dom"],
-      "typeRoots": ["node_modules/@types"],
+      "typeRoots": ["node_modules/@types", "node_modules/@types/node"],
       "types": ["webpack-env"],
       "allowJs": true,
       "checkJs": false,

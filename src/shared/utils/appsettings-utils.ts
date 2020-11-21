@@ -43,8 +43,7 @@ export function getAvailableLanguages(): ILanguage[] {
 }
 
 export function getDefaultLanguage(): ILanguage {
-    const r = validateAppSettings(false, 'localeSettings', 'default');
-    if(r === undefined) return undefined;
+    const r = validateAppSettings(true, 'localeSettings', 'default');
     return validateAppSettings(true, 'localeSettings', 'languages')[r];
 }
 

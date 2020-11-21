@@ -1,8 +1,8 @@
 import { tree } from './translation.constants';
 
 export function translate(label: string, args?: object, fallback = `translation for string ${label} not found`): string {
-    const spl = label.split('.');
     if(tree === undefined) return '';
+    const spl = label.split('.');
     let r = tree;
     let l = spl.length;
     for (let i = 0; i < l; i++) {

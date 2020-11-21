@@ -8,7 +8,8 @@ export function createFileTree(key: string) {
         require('../../../i18n/' + key + '/demo.json')
         // -------------------------------------
     ];
-    for(let i = 0; i < fl.length; i++) {
+    const l = fl.length;
+    for(let i = 0; i < l; i++) {
         const fd = fl[i];
         tree = {
             ...tree,

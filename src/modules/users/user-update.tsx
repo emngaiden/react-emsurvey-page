@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import UserDataForm from './user-data-form-layout';
+import UserDataForm from './user-data-form';
 import { connect } from 'react-redux';
 import { IUser } from 'src/shared/model/user.model';
 import { IRootState } from 'src/shared/reducers';
@@ -35,7 +35,7 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
         }
         return (
             <div>
-                <div style={{ height: '100%' }}>
+                <div>
                 {updating && <Updating />}
                 {creating && <Creating />}
                 </div>

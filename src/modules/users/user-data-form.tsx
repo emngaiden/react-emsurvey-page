@@ -4,6 +4,7 @@ import { IUser } from 'src/shared/model/user.model';
 import { ILanguage } from 'src/shared/model/system/language.model';
 import { getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/app';
 import EncapsulatedForm, { IEncapsulatedFromProps } from 'src/shared/layout/encapsulated-form';
+import { Inputter, Formputter } from 'src/components/inputter';
 
 interface UserDataFormProps extends IEncapsulatedFromProps{
     user?: IUser;
@@ -46,7 +47,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
     render() {
         const { email, firstName, langKey, lastName, login } = this.state;
         return (
-            <EncapsulatedForm independent onSubmit={this.props.onSubmit} data={this.state} disabled={this.props.disabled}>
+            <Formputter onSubmit={this.props.onSubmit} disabled={this.props.disabled} model={this.props.data} >
                 <table>
                     <thead>
                         <tr>
@@ -62,7 +63,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.firstName')}
                             </td>
                             <td colSpan={2}>
-                                <input type="text" id="user-form_first-name" name="firstName" value={firstName} onChange={this.onValueChanged}/>
+                                <Inputter id="user-form_first-name" type="text" value={firstName} name="firstName" onChange={this.onValueChanged}/>
                             </td>
                         </tr>
                         <tr>
@@ -70,7 +71,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.lastName')}
                             </td>
                             <td colSpan={2}>
-                                <input type="text" id="user-form_last-name" name="lastName" value={lastName} onChange={this.onValueChanged}/>
+                                <Inputter type="text" id="user-form_last-name" value={lastName} name="lastName" onChange={this.onValueChanged}/>
                             </td>
                         </tr>
                         <tr>
@@ -78,7 +79,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.login')}
                             </td>
                             <td colSpan={2}>
-                                <input type="text" id="user-form_login" name="login" value={login} onChange={this.onValueChanged}/>
+                                <Inputter type="text" id="user-form_login" value={login} name="login" onChange={this.onValueChanged}/>
                             </td>
                         </tr>
                         <tr>
@@ -86,7 +87,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.email')}
                             </td>
                             <td colSpan={2}>
-                                <input type="text" id="user-form_email  " name="email" value={email} onChange={this.onValueChanged}/>
+                                <Inputter type="text" id="user-form_email" value={email} name="email" onChange={this.onValueChanged}/>
                             </td>
                         </tr>
                         <tr>
@@ -94,16 +95,19 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.language')}
                             </td>
                             <td colSpan={2}>
-                                <select id="user-form_lang-key" name="langKey" value={langKey} onChange={this.onValueChanged}>
-                                    {this.languages.map(language =>(
-                                        <option value={language.key} id={`user-form_language_${language.key}`} key={language.key}>{language.name}</option>
-                                    ))}
-                                </select>
+                                <Inputter type="select" id="user-form_lang-key" value={langKey} name="langKey" onChange={this.onValueChanged} selectOptions={this.languages.map(language => (
+                                    {
+                                        id: `user-form_language_${language.key}`,
+                                        value: language.key,
+                                        name: language.name,
+                                        key: language.key
+                                    }
+                                ))}/>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </EncapsulatedForm>
+            </Formputter>
         );
     }
 }

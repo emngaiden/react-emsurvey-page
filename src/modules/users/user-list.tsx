@@ -49,24 +49,24 @@ class UserList extends React.Component<IUserListProps> {
                     <table>
                         <thead>
                             <tr>
-                                <td>
+                                <th>
                                     {translate('app.id')}
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     {translate('user.firstName')}
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     {translate('user.lastName')}
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     {translate('user.login')}
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     {translate('user.email')}
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     {translate('user.language')}
-                                </td>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

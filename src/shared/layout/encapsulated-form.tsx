@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactNodeArray } from 'react';
+import React, { ReactNodeArray } from 'react';
 import { translate } from 'src/shared/utils/translation';
 import { verifyArray, verifyObject } from 'src/shared/utils/app';
 

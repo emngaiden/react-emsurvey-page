@@ -6,21 +6,22 @@ export default class ErrorCatchingRoute extends React.Component<RouteProps> {
 
     constructor(props) {
         super(props);
-        if(!this.props.component) throw new Error(`A component needs to be specified for path ${(this.props.rest as any).path}`)
+        if(!this.props.component) throw new Error(`A component needs to be specified for path ${(this.props as any).path}`)
         this.encloseRoute = this.encloseRoute.bind(this);
     }
 
-    encloseRoute() {
+    encloseRoute(props) {
         const Component = this.props.component;
         return (
             <ErrorBoundary>
-                <Component {...this.props}  />
+                <Component {...props}  />
             </ErrorBoundary>
         );
     }
 
     render() {
-        return <Route {...this.props.rest} render={this.encloseRoute} />
+        const {component: Component, ...rest} = this.props;
+        return <Route {...rest} render={this.encloseRoute} />
     }
 
 }

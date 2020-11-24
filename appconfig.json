@@ -2,17 +2,41 @@
     "apiSettings":{
         "api": {
             "main": {
-                "url": "https://cat-fact.herokuapp.com",
+                "url": "http://localhost:8080/api",
                 "endpoints": {
-                    "facts": {
-                        "path": "facts",
+                    "createUser": {
+                        "path": "user",
                         "args": [
-                            "_id"
+                            {
+                                "name": "user",
+                                "asBody": true
+                            }
                         ],
-                        "methods": [
-                            "post",
-                            "get"
-                        ]
+                        "method": "post"
+                    },
+                    "getUsers": {
+                        "path": "users",
+                        "method": "get" 
+                    },
+                    "getUser": {
+                        "path": "user",
+                        "args": [
+                            {
+                                "name": "id",
+                                "asPath": true
+                            }
+                        ],
+                        "method": "get"
+                    },
+                    "updateUser": {
+                        "path": "user",
+                        "args": [
+                            {
+                                "name": "user",
+                                "asBody": true
+                            }
+                        ],
+                        "method": "put"
                     }
                 }
             }

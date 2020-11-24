@@ -1,6 +1,6 @@
-import { ILanguage } from 'src/shared/model/language.model';
-import { IApiEndpoint } from 'src/shared/model/api-endpoint.model';
-import { IApi } from 'src/shared/model/api.model';
+import { ILanguage } from 'src/shared/model/system/language.model';
+import { IApiEndpoint } from 'src/shared/model/system/api-endpoint.model';
+import { IApi } from 'src/shared/model/system/api.model';
 
 const appconfig = require('../../../appconfig.json');
 
@@ -13,7 +13,7 @@ export function getApiData(apiName: string): IApi {
             name: key,
             path: value.path,
             args: value.args,
-            methods: value.methods
+            method: value.method
         });
     })
     const ret: IApi = {

@@ -1,17 +1,17 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { translate } from 'src/shared/utils/translation/translation';
 
-class Start extends React.Component {
+export interface IStartProps extends RouteComponentProps<{ url: string }>{}
+
+class Start extends React.Component<IStartProps> {
 
     render() {
         return (
             <div>
-                {translate('app.start.title')}
-                <br />
-                <Link to={`/demo`} className="link">
-                    {translate('app.start.gotoDemo')}
+                {translate('app.start.title')} 
+                <Link to={'/users'}>
+                    Goto users
                 </Link>
           </div>
         );

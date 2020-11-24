@@ -1,0 +1,8 @@
+{
+    "entity": {
+        "user": {
+            "singular": "Usuario",
+            "plural": "Usuarios"
+        }
+    }
+}

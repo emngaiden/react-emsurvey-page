@@ -1,0 +1,10 @@
+{
+    "user": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "login": "Login",
+        "email": "E-mail",
+        "language": "Lenguaje",
+        "createUser": "Crear usuario"
+    }
+}

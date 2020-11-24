@@ -18,7 +18,8 @@
                 "alias": {
                     "src": "./src"
                 }
-            }
+            },
+            "@babel/plugin-proposal-class-properties"
         ]
     ]
 }

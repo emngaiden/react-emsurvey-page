@@ -1,8 +1,13 @@
 {
     "app": {
+        "id": "Identicador",
+        "loading": "Cargando...",
+        "updating": "Actualizando...",
+        "creating": "Creando...",
+        "noItems": "No se encontraron elementos",
         "start": {
-            "title": "Página de inicio",
-            "gotoDemo": "Ir a demo"
-        } 
+            "title": "Página de inicio"
+        },
+        "accept": "Aceptar"
     }
 }

@@ -1,8 +1,13 @@
 {
     "app": {
+        "id": "Identifier",
+        "loading": "Loading...",
+        "updating": "Updating...",
+        "creating": "Creating...",
+        "noItems": "No items found",
         "start": {
-            "title": "Start page",
-            "gotoDemo": "Go to demo"
-        } 
+            "title": "Start page"
+        },
+        "accept": "Accept"
     }
 }

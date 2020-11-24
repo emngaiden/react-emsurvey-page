@@ -1,6 +1,6 @@
 import React, { ReactNode, ReactNodeArray } from 'react';
-import { translate } from 'src/shared/utils/translation/translation';
-import { verifyArray, verifyObject } from 'src/shared/utils/app.utils';
+import { translate } from 'src/shared/utils/translation';
+import { verifyArray, verifyObject } from 'src/shared/utils/app';
 
 
 export interface IEncapsulatedFromProps {

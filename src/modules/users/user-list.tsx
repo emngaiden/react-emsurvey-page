@@ -2,8 +2,8 @@ import React from 'react';
 import { IRootState } from 'src/shared/reducers';
 import { getAllUsers } from 'src/shared/reducers/users.reducer';
 import { connect } from 'react-redux';
-import { translate } from 'src/shared/utils/translation/translation';
-import { verifyArray } from 'src/shared/utils/app.utils';
+import { translate } from 'src/shared/utils/translation';
+import { verifyArray } from 'src/shared/utils/app';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import Loading from 'src/shared/layout/loading';
 

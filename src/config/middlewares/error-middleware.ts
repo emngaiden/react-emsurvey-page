@@ -1,4 +1,4 @@
-import { isPromise } from 'src/shared/utils/app.utils';
+import { isPromise } from 'src/shared/utils/app';
 
 const getErrorMessage = errorData => {
   let message = errorData.message;

@@ -1,4 +1,4 @@
-import { verifyString } from './app.utils';
+import { verifyString } from 'src/shared/utils/app';
 
 export const cleanEntity = (e: any) => {
     const r = {...e};

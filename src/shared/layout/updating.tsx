@@ -1,5 +1,5 @@
 import React from 'react';
-import { translate } from 'src/shared/utils/translation/translation';
+import { translate } from 'src/shared/utils/translation';
 
 interface ILoadingProps {
     message?: string;

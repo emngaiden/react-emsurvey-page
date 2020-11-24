@@ -1,5 +1,5 @@
-import { getDefaultLanguage, getLanguage, getAvailableLanguages } from 'src/shared/utils/appconfig.utils';
-import { createFileTree } from 'src/shared/utils/translation/translation.constants';
+import { getDefaultLanguage, getLanguage } from 'src/shared/utils/app';
+import { createFileTree } from 'src/shared/utils/translation';
 
 const dl = getDefaultLanguage();
 

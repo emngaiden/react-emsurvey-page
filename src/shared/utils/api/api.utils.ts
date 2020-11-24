@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getApiData } from './appconfig.utils'
+import { getApiData } from 'src/shared/utils/app';
 import { IApi, getEndpoint } from 'src/shared/model/system/api.model';
 import { IApiEndpoint } from 'src/shared/model/system/api-endpoint.model';
 

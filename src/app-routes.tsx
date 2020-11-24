@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import ErrorCatchingRoute from './config/error/error-catching-route';
+import ErrorCatchingRoute from 'src/config/error/error-catching-route';
 import Start from 'src/modules/start/start';
 import Users from 'src/modules/users';
 

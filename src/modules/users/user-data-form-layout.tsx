@@ -1,8 +1,8 @@
 import React from 'react';
-import { translate } from 'src/shared/utils/translation/translation';
+import { translate } from 'src/shared/utils/translation';
 import { IUser } from 'src/shared/model/user.model';
 import { ILanguage } from 'src/shared/model/system/language.model';
-import { getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/appconfig.utils';
+import { getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/app';
 import EncapsulatedForm, { IEncapsulatedFromProps } from 'src/shared/layout/encapsulated-form';
 
 interface UserDataFormProps extends IEncapsulatedFromProps{

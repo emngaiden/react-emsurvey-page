@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { IUser } from 'src/shared/model/user.model';
 import { IRootState } from 'src/shared/reducers';
 import { getUser, updateUser, createUser } from 'src/shared/reducers/users.reducer';
-import { verifyObject } from 'src/shared/utils/app.utils';
+import { verifyObject } from 'src/shared/utils/app';
 import Loading from 'src/shared/layout/loading';
 import Updating from 'src/shared/layout/updating';
 import Creating from 'src/shared/layout/creating';

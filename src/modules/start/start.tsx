@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { translate } from 'src/shared/utils/translation/translation';
+import { translate } from 'src/shared/utils/translation';
 
 export interface IStartProps extends RouteComponentProps<{ url: string }>{}
 

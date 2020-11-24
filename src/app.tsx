@@ -5,7 +5,7 @@ import { IRootState } from 'src/shared/reducers';
 import Routes from './app-routes';
 import { setLocale } from 'src/shared/reducers/locale.reducer';
 import { connect } from 'react-redux';
-import { createFileTree } from 'src/shared/utils/translation/translation.constants';
+import { createFileTree } from 'src/shared/utils/translation';
 import './app.css';
 
 

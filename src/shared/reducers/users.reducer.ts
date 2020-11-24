@@ -1,4 +1,4 @@
-import { sendRequest } from 'src/shared/utils/api.utils';
+import { sendRequest } from 'src/shared/utils/api';
 import { IUser } from 'src/shared/model/user.model';
 import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
 import { cleanEntity } from 'src/shared/utils/entity.utils';

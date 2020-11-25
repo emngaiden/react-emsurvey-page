@@ -8,6 +8,7 @@ const Routes = ({ match }) => (
     <>
       <Switch>
         <ErrorCatchingRoute path={`${match.url}/new`} exact component={UserUpdate} />
+        <ErrorCatchingRoute path={`${match.url}/edit/:id`} exact component={UserUpdate} />
         <ErrorCatchingRoute path={`${match.url}/`} exact component={UserList} />
         <ErrorCatchingRoute path={match.url} component={UserList} />
       </Switch>

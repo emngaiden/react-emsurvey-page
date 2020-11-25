@@ -30,6 +30,10 @@ class UserList extends React.Component<IUserListProps> {
         }
     }
 
+    onEdit(id: string) {
+        this.props.history.push(`${this.props.location.pathname}/edit/${id}`);
+    }
+
     render() {
         const { users, loading } = this.props;
         const createUserButton = (
@@ -107,7 +111,7 @@ class UserList extends React.Component<IUserListProps> {
                                         {this.languagesList[user.langKey].name}
                                     </td>
                                     <td>
-                                        <button>
+                                        <button onClick={() => this.onEdit(user.id)}>
                                             {translate('app.edit')}
                                         </button>
                                         <button onClick={() => this.onDelete(user)}>
@@ -125,9 +129,12 @@ class UserList extends React.Component<IUserListProps> {
 
 }
 
-const mapStateToProps = (state: IRootState) => ({
-    users: state.users.usersList,
-    loading: state.users.loading
+const mapStateToProps = ({ users }: IRootState) => ({
+    users: users.usersList,
+    loading: users.loading,
+    deleting: users.deleting,
+    loadingSuccess: users.loadingSuccess,
+    deletingSuccess: users.deleteSuccess
 });
 
 const mapDispatchToProps = {

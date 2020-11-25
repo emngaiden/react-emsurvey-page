@@ -7,8 +7,13 @@ const initialState = {
     usersList: undefined as IUser[],
     user: undefined as IUser,
     creating: false,
+    creationSuccess: false,
+    updateSuccess: false,
+    loadingSuccess: false,
     loading: false,
     updating: false,
+    deleting: false,
+    deleteSuccess: false,
     errorMessage: undefined
 }
 
@@ -19,7 +24,8 @@ export const ACTION_TYPES = {
     GET_USERS_LIST: 'users/get_users_list',
     CREATE_USER: 'users/create_user',
     UPDATE_USER: 'users/update_user',
-    DELETE_USER: 'user/delete_user'
+    DELETE_USER: 'user/delete_user',
+    RESET: 'user/reset'
 }
 
 export default (state: UsersState = initialState, action): UsersState => {
@@ -43,6 +49,10 @@ export default (state: UsersState = initialState, action): UsersState => {
                 loading: true
             }
         case(REQUEST(ACTION_TYPES.DELETE_USER)):
+            return {
+                ...state,
+                deleting: true
+            }
         case(REQUEST(ACTION_TYPES.UPDATE_USER)): 
             return {
                 ...state,
@@ -58,37 +68,47 @@ export default (state: UsersState = initialState, action): UsersState => {
                 loading: false,
                 creating: false,
                 updating: false,
+                loadingSuccess: false,
+                creationSuccess: false,
+                updateSuccess: false,
                 errorMessage: action.payload
             };
         case(SUCCESS(ACTION_TYPES.GET_USER)):
             return {
                 ...state,
                 loading: false,
+                loadingSuccess: true,
                 user: action.payload.data
             };
         case(SUCCESS(ACTION_TYPES.GET_USERS_LIST)):
             return {
                 ...state,
                 loading: false,
+                loadingSuccess: true,
                 usersList: action.payload.data
             };
         case(SUCCESS(ACTION_TYPES.CREATE_USER)):
             return {
                 ...state,
                 creating: false,
+                creationSuccess: true,
                 user: action.payload.data
             };
         case(SUCCESS(ACTION_TYPES.UPDATE_USER)): 
             return {
                 ...state,
                 updating: false,
+                updateSuccess: true,
                 user: action.payload.data
             };
         case(SUCCESS(ACTION_TYPES.DELETE_USER)): 
             return {
                 ...state,
-                loading: false
+                deleting: false,
+                deleteSuccess: true
             }
+        case ACTION_TYPES.RESET :
+            return initialState
         default: return state;
     }
 };
@@ -126,3 +146,7 @@ export const deleteUser = (id: string) => async dispatch => {
     });
     dispatch(getAllUsers());
 }
+
+export const reset = () => ({
+    type: ACTION_TYPES.RESET
+});

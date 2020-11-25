@@ -4,7 +4,7 @@ import UserDataForm from './user-data-form';
 import { connect } from 'react-redux';
 import { IUser } from 'src/shared/model/user.model';
 import { IRootState } from 'src/shared/reducers';
-import { getUser, updateUser, createUser } from 'src/shared/reducers/users.reducer';
+import { getUser, updateUser, createUser, reset } from 'src/shared/reducers/users.reducer';
 import { verifyObject } from 'src/shared/utils/app';
 import Loading from 'src/shared/layout/loading';
 import Updating from 'src/shared/layout/updating';
@@ -15,14 +15,14 @@ interface IUserUpdateState {
     isNew: boolean;
 }
 
-interface IUserUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+interface IUserUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
     constructor(props){
         super(props)
         this.onValidSubmit = this.onValidSubmit.bind(this);
         this.state = {
-            isNew: true
+            isNew: this.props.match.params.id === undefined
         }
     }
 
@@ -30,6 +30,12 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
         this.props.createUser(user);
         event.stopPropagation();
         event.preventDefault();
+    }
+
+    componentDidMount() {
+        if(!this.state.isNew) {
+            this.props.getUser(this.props.match.params.id)
+        }
     }
 
     render() {

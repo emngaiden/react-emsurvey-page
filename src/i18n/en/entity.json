@@ -2,7 +2,8 @@
     "entity": {
         "user": {
             "singular": "User",
-            "plural": "Users"
+            "plural": "Users",
+            "create": "Create new user"
         }
     }
 }

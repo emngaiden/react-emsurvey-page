@@ -9,6 +9,7 @@ import { verifyObject } from 'src/shared/utils/app';
 import Loading from 'src/shared/layout/loading';
 import Updating from 'src/shared/layout/updating';
 import Creating from 'src/shared/layout/creating';
+import { translate } from 'src/shared/utils/translation';
 
 interface IUserUpdateState {
     isNew: boolean;
@@ -20,6 +21,9 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
     constructor(props){
         super(props)
         this.onValidSubmit = this.onValidSubmit.bind(this);
+        this.state = {
+            isNew: true
+        }
     }
 
     onValidSubmit(user: IUser, event: any) {
@@ -30,17 +34,22 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
 
     render() {
         const { user, loading, updating, creating } = this.props;
-        if(loading) {
-            return <Loading />
-        }
         return (
             <div>
-                <div>
-                {updating && <Updating />}
-                {creating && <Creating />}
-                </div>
-                <UserDataForm onSubmit={this.onValidSubmit} disabled={updating || creating} user={verifyObject(user) ? user : undefined} />
-            </div>   
+                <h1>{translate('entity.user.create')}</h1>
+                {loading ?
+                (
+                    <Loading />
+                ) : (
+                    <div>
+                        <div>
+                        {updating && <Updating />}
+                        {creating && <Creating />}
+                        </div>
+                        <UserDataForm onSubmit={this.onValidSubmit} disabled={loading || updating || creating} user={verifyObject(user) ? user : undefined} />
+                    </div>   
+                )};
+            </div>
         );
     }
 }

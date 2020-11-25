@@ -71,7 +71,7 @@ class UserList extends React.Component<IUserListProps> {
                         </thead>
                         <tbody>
                             {users.map(user => (
-                                <tr>
+                                <tr key={user.id}>
                                     <td>
                                         {user.id}
                                     </td>

@@ -1,5 +1,6 @@
 {
     "user": {
+        "title": "User",
         "firstName": "First name",
         "lastName": "Last name",
         "login": "Login",

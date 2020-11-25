@@ -11,5 +11,5 @@ export function verifyObject(d: Object): boolean {
 }
 
 export function verifyString(d: string) {
-    return verifyObject(d) && d !== '' && !d.match(/\s*/g);
+    return verifyObject(d) && d !== '' && !d.match(/\s+/g);
 }

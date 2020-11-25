@@ -3,10 +3,9 @@ import { translate } from 'src/shared/utils/translation';
 import { IUser } from 'src/shared/model/user.model';
 import { ILanguage } from 'src/shared/model/system/language.model';
 import { getAvailableLanguages, getDefaultLanguage } from 'src/shared/utils/app';
-import EncapsulatedForm, { IEncapsulatedFromProps } from 'src/shared/layout/encapsulated-form';
-import { Inputter, Formputter } from 'src/components/inputter';
+import { Inputter, Formputter, required, email as vEmail, IFormputterProps} from 'src/components/inputter';
 
-interface UserDataFormProps extends IEncapsulatedFromProps{
+interface UserDataFormProps extends IFormputterProps{
     user?: IUser;
 }
 
@@ -46,8 +45,9 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
 
     render() {
         const { email, firstName, langKey, lastName, login } = this.state;
+        const { user, ...rest } = this.props;
         return (
-            <Formputter onSubmit={this.props.onSubmit} disabled={this.props.disabled} model={this.props.data} >
+            <Formputter {...rest} model={{...this.state}}>
                 <table>
                     <thead>
                         <tr>
@@ -63,7 +63,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.firstName')}
                             </td>
                             <td colSpan={2}>
-                                <Inputter id="user-form_first-name" type="text" value={firstName} name="firstName" onChange={this.onValueChanged}/>
+                                <Inputter id="user-form_first-name" type="text" value={firstName} name="firstName" onChange={this.onValueChanged} validators={[required]}/>
                             </td>
                         </tr>
                         <tr>
@@ -71,7 +71,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.lastName')}
                             </td>
                             <td colSpan={2}>
-                                <Inputter type="text" id="user-form_last-name" value={lastName} name="lastName" onChange={this.onValueChanged}/>
+                                <Inputter type="text" id="user-form_last-name" value={lastName} name="lastName" onChange={this.onValueChanged} validators={[required]}/>
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +79,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.login')}
                             </td>
                             <td colSpan={2}>
-                                <Inputter type="text" id="user-form_login" value={login} name="login" onChange={this.onValueChanged}/>
+                                <Inputter type="text" id="user-form_login" value={login} name="login" onChange={this.onValueChanged} validators={[required]}/>
                             </td>
                         </tr>
                         <tr>
@@ -87,7 +87,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.email')}
                             </td>
                             <td colSpan={2}>
-                                <Inputter type="text" id="user-form_email" value={email} name="email" onChange={this.onValueChanged}/>
+                                <Inputter type="text" id="user-form_email" value={email} name="email" onChange={this.onValueChanged} validators={[required, vEmail]}/>
                             </td>
                         </tr>
                         <tr>

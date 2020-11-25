@@ -13,7 +13,7 @@ class Start extends React.Component<IStartProps> {
                 <Link to={'/users'}>
                     Goto users
                 </Link>
-          </div>
+            </div>
         );
     }
 }

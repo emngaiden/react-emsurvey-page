@@ -15,3 +15,17 @@ export const cleanEntity = (e: any) => {
     });
     return r;
 };
+
+export const arrayToObject = (a: object[], k: string): {} => {
+    const r = {};
+    for (const ai of a) {
+        const kv = ai[k];
+        if(kv === undefined) {
+            throw Error('Missing field ' + k + ' for object mapping');
+        }
+        r[kv] = {
+            ...ai
+        }
+    }
+    return r;
+};

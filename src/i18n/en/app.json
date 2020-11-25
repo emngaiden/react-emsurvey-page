@@ -1,6 +1,9 @@
 {
     "app": {
         "id": "Identifier",
+        "edit": "Edit",
+        "delete": "Delete",
+        "hide": "Hide",
         "loading": "Loading...",
         "updating": "Updating...",
         "creating": "Creating...",

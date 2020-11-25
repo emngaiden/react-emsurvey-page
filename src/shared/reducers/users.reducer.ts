@@ -1,7 +1,7 @@
 import { sendRequest } from 'src/shared/utils/api';
 import { IUser } from 'src/shared/model/user.model';
 import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
-import { cleanEntity } from 'src/shared/utils/entity.utils';
+import { cleanEntity } from 'src/shared/utils/app/entity.utils';
 
 const initialState = {
     usersList: undefined as IUser[],
@@ -18,7 +18,8 @@ export const ACTION_TYPES = {
     GET_USER: 'users/get_user',
     GET_USERS_LIST: 'users/get_users_list',
     CREATE_USER: 'users/create_user',
-    UPDATE_USER: 'users/update_user'
+    UPDATE_USER: 'users/update_user',
+    DELETE_USER: 'user/delete_user'
 }
 
 export default (state: UsersState = initialState, action): UsersState => {
@@ -41,6 +42,7 @@ export default (state: UsersState = initialState, action): UsersState => {
                 usersList: undefined,
                 loading: true
             }
+        case(REQUEST(ACTION_TYPES.DELETE_USER)):
         case(REQUEST(ACTION_TYPES.UPDATE_USER)): 
             return {
                 ...state,
@@ -50,6 +52,7 @@ export default (state: UsersState = initialState, action): UsersState => {
         case(FAILURE(ACTION_TYPES.CREATE_USER)):
         case(FAILURE(ACTION_TYPES.GET_USERS_LIST)):
         case(FAILURE(ACTION_TYPES.UPDATE_USER)):
+        case(FAILURE(ACTION_TYPES.DELETE_USER)):
             return {
                 ...state,
                 loading: false,
@@ -81,6 +84,11 @@ export default (state: UsersState = initialState, action): UsersState => {
                 updating: false,
                 user: action.payload.data
             };
+        case(SUCCESS(ACTION_TYPES.DELETE_USER)): 
+            return {
+                ...state,
+                loading: false
+            }
         default: return state;
     }
 };
@@ -110,3 +118,11 @@ export const updateUser = (user: IUser) => async dispatch => {
     })
     dispatch(getAllUsers());
 };
+
+export const deleteUser = (id: string) => async dispatch => {
+    await dispatch({
+        type: ACTION_TYPES.DELETE_USER,
+        payload: sendRequest('main', 'deleteUser', { id })
+    });
+    dispatch(getAllUsers());
+}

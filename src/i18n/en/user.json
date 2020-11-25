@@ -6,6 +6,9 @@
         "login": "Login",
         "email": "E-mail",
         "language": "Language",
-        "createUser": "Create user"
+        "createUser": "Create user",
+        "confirm": {
+            "delete": "Are you sure you want to delete the user {%name%}?"
+        }
     }
 }

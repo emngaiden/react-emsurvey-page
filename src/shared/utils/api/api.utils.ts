@@ -3,23 +3,25 @@ import { getApiData } from 'src/shared/utils/app';
 import { IApi, getEndpoint } from 'src/shared/model/system/api.model';
 import { IApiEndpoint } from 'src/shared/model/system/api-endpoint.model';
 
-export const sendRequest = (an: string, en: string, g?: Object): Promise<any> => {
+export const sendRequest = (an: string, en: string, g?: any): Promise<any> => {
     const a: IApi = getApiData(an);
+    if(a === undefined) throw Error('No API with name "' + an + '" found. Was it added to appconfig.apiSettings.api?');
     const e: IApiEndpoint = getEndpoint(a, en);
+    if(e === undefined) throw Error('No endpoint with name "' + en + '" on API "' + an + '" found. Was it added to appconfig.apiSettings.api.' + an + '.endpoints?')
     let m = e.method;
     if(m === 'post' || m === 'get' || m === 'put' || m === 'delete' || m === 'patch') {
         let d : ApiRequestData = buildData(a.url, e, g);
         switch(m) {
             case 'post':
-                return axios.post(d.u, d.a);
+                return axios.post(d.u, d.a, d.o);
             case 'get':
                 return axios.get(d.u, d.o);
             case 'put':
                 return axios.put(d.u, d.a, d.o);
             case 'delete':
-                return axios.put(d.u, d.a, d.o);
+                return axios.delete(d.u, d.a);
             case 'patch':
-                return axios.put(d.u, d.a, d.o)
+                return axios.patch(d.u, d.a, d.o)
             default: throw new Error('invalid method on API endpoint ' + an + '.' + en);
         }
     } else {
@@ -39,6 +41,7 @@ function buildData(u: string, e: IApiEndpoint, g: Object): ApiRequestData {
 function buildUrl(u: string, e: IApiEndpoint, g: Object): string {
     u = `${u}/${e.path}`;
     if(g === undefined) return u;
+    if(typeof g !== 'object') return u;
     let paths = '';
     let variables = '?';
     for (const endpointArg of e.args) {
@@ -69,6 +72,7 @@ function buildUrl(u: string, e: IApiEndpoint, g: Object): string {
 
 function buildArgs(e: IApiEndpoint, g: Object): Object {
     if(g === undefined) return undefined;
+    if(typeof g !== 'object') return g;
     let r = {};
     for(const endpointArg of e.args) {
         const  argName = endpointArg.name;
@@ -96,6 +100,30 @@ interface ApiRequestData {
 }
 
 function buildOptions(e: IApiEndpoint, g: Object): Object {
-    // TODO: implement to create the options object
-    return undefined;
+    if(g === undefined || typeof g !== 'object') return undefined;
+    let r = {};
+    for(const endpointArg of e.args) {
+        const  argName = endpointArg.name;
+        const argValue = g[argName];
+        if(argValue === undefined) throw new Error('Missing argument "' +  argName + '" during API endpoint "' + e.name + '" request');
+        if(endpointArg.asParam) {
+            if(typeof argValue === 'object') {
+                r = {
+                    ...r,
+                    ...argValue
+                };
+            } else {
+                r[argName] = argValue;  
+            }
+        }
+    }
+    if(Object.keys(r).length > 0) {
+        return {
+            params: {
+                ...r
+            }
+        }
+    } else {
+        return undefined
+    }
 }

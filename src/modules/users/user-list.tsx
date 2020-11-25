@@ -1,21 +1,33 @@
 import React from 'react';
 import { IRootState } from 'src/shared/reducers';
-import { getAllUsers } from 'src/shared/reducers/users.reducer';
+import { getAllUsers, deleteUser } from 'src/shared/reducers/users.reducer';
 import { connect } from 'react-redux';
 import { translate } from 'src/shared/utils/translation';
-import { verifyArray } from 'src/shared/utils/app';
+import { verifyArray, getAvailableLanguages, arrayToObject } from 'src/shared/utils/app';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import Loading from 'src/shared/layout/loading';
+import { IUser } from 'src/shared/model/user.model';
 
 export interface IUserListProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
 class UserList extends React.Component<IUserListProps> {
+    languagesList: any;
     constructor(props) {
         super(props);
+        this.languagesList = arrayToObject(getAvailableLanguages(), 'key');
     }
 
     componentDidMount() {
         this.props.getAllUsers();
+    }
+
+    onDelete(user: IUser) {
+        const c = confirm(
+            translate('user.confirm.delete', { name: user.login })
+        );
+        if(c) {
+            this.props.deleteUser(user.id);
+        }
     }
 
     render() {
@@ -67,6 +79,7 @@ class UserList extends React.Component<IUserListProps> {
                                 <th>
                                     {translate('user.language')}
                                 </th>
+                                <th />
                             </tr>
                         </thead>
                         <tbody>
@@ -90,6 +103,17 @@ class UserList extends React.Component<IUserListProps> {
                                     <td>
                                         {user.password}
                                     </td>
+                                    <td>
+                                        {this.languagesList[user.langKey].name}
+                                    </td>
+                                    <td>
+                                        <button>
+                                            {translate('app.edit')}
+                                        </button>
+                                        <button onClick={() => this.onDelete(user)}>
+                                            {translate('app.delete')}
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -107,7 +131,8 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-    getAllUsers
+    getAllUsers,
+    deleteUser
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

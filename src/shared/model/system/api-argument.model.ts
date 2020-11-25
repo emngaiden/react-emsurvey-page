@@ -3,4 +3,5 @@ export interface IApiArgument{
     asPath?: boolean;
     asBody?: boolean;
     asUrl?: boolean;
+    asParam?: boolean;
 }

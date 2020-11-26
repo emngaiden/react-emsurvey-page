@@ -41,7 +41,7 @@ export class Formputter extends React.Component<IFormputterProps> {
         const nChildren = shouldSearch ? this.handleInputs(child.props.children, disabled, created) : child.props.children;
         return React.cloneElement(child, hasProps ? {
           ...child.props,
-          disabled: isCorrectType ? disabled : undefined,
+          disabled: !child.props.static && isCorrectType ? disabled : undefined,
           ref
         }: undefined, nChildren);
       } else {

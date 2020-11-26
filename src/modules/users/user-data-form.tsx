@@ -10,6 +10,7 @@ interface UserDataFormProps extends IFormputterProps{
 }
 
 const initialState = {
+    id: '',
     firstName: '',
     lastName: '',
     login: '',
@@ -26,6 +27,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
         super(props);
         const { user } = this.props;
         this.state = user !== undefined ? {
+            id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,

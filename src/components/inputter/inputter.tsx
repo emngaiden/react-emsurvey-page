@@ -7,6 +7,7 @@ interface IInputterProps {
   value?: any;
   name?: string;
   id?: any;
+  static?: boolean;
   customInput?: ReactElement;
   inputClassName?: string;
   textClassName?: string;
@@ -114,5 +115,6 @@ Inputter.defaultProps = {
   type: 'text',
   disabled: false,
   id: 'inputter',
-  selectOptions: []
+  selectOptions: [],
+  static: false
 };

@@ -27,9 +27,13 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
     }
 
     onValidSubmit(user: IUser, event: any) {
-        this.props.createUser(user);
         event.stopPropagation();
         event.preventDefault();
+        if(this.state.isNew) {
+            this.props.createUser(user);
+        } else {
+            this.props.updateUser(user);
+        }
     }
 
     componentDidMount() {

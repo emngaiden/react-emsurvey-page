@@ -114,7 +114,7 @@ class UserDataForm extends React.Component<UserDataFormProps, UserDataFormState>
                                 {translate('user.language')}
                             </td>
                             <td colSpan={2}>
-                                <Inputter type="select" id="user-form_lang-key" value={langKey} name="langKey" onChange={this.onValueChanged} selectOptions={this.languages.map(language => (
+                                <Inputter type="select" id="user-form_lang-key" value={langKey} name="langKey" onChange={this.onValueChanged} selectableOptions={this.languages.map(language => (
                                     {
                                         id: `user-form_language_${language.key}`,
                                         value: language.key,

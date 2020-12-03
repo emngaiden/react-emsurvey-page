@@ -3,11 +3,13 @@ import { Switch } from 'react-router-dom';
 import ErrorCatchingRoute from 'src/config/error/error-catching-route';
 import Start from 'src/modules/start/start';
 import Users from 'src/modules/users';
+import Test from 'src/modules/test/test';
 
 const Routes = () => (
   <div className="view-routes">
     <Switch>
       <ErrorCatchingRoute path="/users" component={Users} />
+      <ErrorCatchingRoute path="/test" component={Test} />
       <ErrorCatchingRoute path="/" component={Start} />
       <ErrorCatchingRoute component={Start} />
     </Switch>

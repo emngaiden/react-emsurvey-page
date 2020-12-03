@@ -1,0 +1,21 @@
+.state-div {
+    margin: 2px;
+    border-radius: 3px;
+    width: fit-content;
+    padding: 2px;
+}
+
+.state-div-success {
+    margin: 0px;
+    border: 2px solid green;
+}
+
+.state-div-error {
+    margin: 0px;
+    border: 2px solid red;
+}
+
+.state-div-warning {
+    margin: 0px;
+    border: 2px solid orange;
+}

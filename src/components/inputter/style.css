@@ -1,3 +1,20 @@
-.inputer-invalid {
-    border-color: red;
+input, select {
+    width: 100%;
+}
+
+.inputter {
+    margin: 2px;
+    padding: 2px;
+}
+
+.inputter-invalid {
+    border: 2px solid red;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+.inputter-error-message {
+    font-size: 0.7em;
+    color: darkred;
+    text-align: center;
 }

@@ -13,6 +13,9 @@ class Start extends React.Component<IStartProps> {
                 <Link to={'/users'}>
                     Goto users
                 </Link>
+                <Link to={'/test'}>
+                    Goto test
+                </Link>
             </div>
         );
     }

@@ -7,3 +7,8 @@
 .error-details {
   white-space: pre-wrap;
 }
+
+.center-table {
+  margin-right: auto;
+  margin-left: auto;
+}

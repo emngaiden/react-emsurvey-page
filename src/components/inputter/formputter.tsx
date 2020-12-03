@@ -1,6 +1,7 @@
 import React, { ReactNodeArray } from 'react';
 import { Inputter, InputterError } from './inputter';
 import { verifyArray, verifyObject }  from './validator';
+import './style.css';
 
 export interface IFormputterProps {
   disabled?: boolean;

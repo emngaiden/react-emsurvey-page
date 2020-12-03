@@ -10,6 +10,7 @@ import Loading from 'src/shared/layout/loading';
 import Updating from 'src/shared/layout/updating';
 import Creating from 'src/shared/layout/creating';
 import { translate } from 'src/shared/utils/translation';
+import { StateDiv } from 'src/components/state-div';
 
 interface IUserUpdateState {
     isNew: boolean;
@@ -37,15 +38,24 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
     }
 
     componentDidMount() {
-        if(!this.state.isNew) {
-            this.props.getUser(this.props.match.params.id)
+        if(!this.state.isNew) this.props.getUser(this.props.match.params.id);
+    }
+
+    componentDidUpdate(prevProps: IUserUpdateProps, prevState: IUserUpdateState) {
+        if(prevProps.creating && !this.props.creating && this.props.creatingSuccess) {
+            setTimeout(this.props.history.goBack, 2000);
         }
     }
 
     render() {
-        const { user, loading, updating, creating } = this.props;
+        const { user, loading, updating, creating, creatingSuccess, error } = this.props;
+        const { isNew } = this.state;
         return (
-            <div>
+            <StateDiv state={
+                error !== undefined ? 'error' :
+                creatingSuccess ? 'success' :
+                undefined
+            }>
                 <h1>{translate('entity.user.create')}</h1>
                 {loading ?
                 (
@@ -56,10 +66,10 @@ class UserUpdate extends React.Component<IUserUpdateProps, IUserUpdateState> {
                         {updating && <Updating />}
                         {creating && <Creating />}
                         </div>
-                        <UserDataForm onSubmit={this.onValidSubmit} disabled={loading || updating || creating} user={verifyObject(user) ? user : undefined} />
+                        <UserDataForm onSubmit={this.onValidSubmit} disabled={loading || updating || creating || creatingSuccess} user={!isNew && verifyObject(user) ? user : undefined} />
                     </div>   
                 )};
-            </div>
+            </StateDiv>
         );
     }
 }
@@ -68,13 +78,16 @@ const mapStateToProps = ({ users }: IRootState) => ({
     user: users.user,
     loading: users.loading,
     updating: users.updating,
-    creating: users.creating
+    creating: users.creating,
+    creatingSuccess: users.creationSuccess,
+    error: users.errorMessage
 })
 
 const mapDispatchToProps = {
     getUser,
     updateUser,
-    createUser
+    createUser,
+    reset
 }
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IRootState } from 'src/shared/reducers';
-import { getAllUsers, deleteUser } from 'src/shared/reducers/users.reducer';
+import { getAllUsers, deleteUser, reset } from 'src/shared/reducers/users.reducer';
 import { connect } from 'react-redux';
 import { translate } from 'src/shared/utils/translation';
 import { verifyArray, getAvailableLanguages, arrayToObject } from 'src/shared/utils/app';
@@ -18,6 +18,7 @@ class UserList extends React.Component<IUserListProps> {
     }
 
     componentDidMount() {
+        this.props.reset();
         this.props.getAllUsers();
     }
 
@@ -139,7 +140,8 @@ const mapStateToProps = ({ users }: IRootState) => ({
 
 const mapDispatchToProps = {
     getAllUsers,
-    deleteUser
+    deleteUser,
+    reset
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

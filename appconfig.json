@@ -15,7 +15,7 @@
                         "method": "post"
                     },
                     "getUsers": {
-                        "path": "users/list",
+                        "path": "users",
                         "method": "get" 
                     },
                     "getUser": {
@@ -29,7 +29,7 @@
                         "method": "get"
                     },
                     "updateUser": {
-                        "path": "users/update",
+                        "path": "users",
                         "args": [
                             {
                                 "name": "user",

@@ -75,9 +75,11 @@ export class Formputter extends React.Component<IFormputterProps> {
     const reChildren = this.handleInputs(children, disabled, created);
     return(
       <div id="formputter">
-        <div>
-          {reChildren}
-        </div>
+        <form>
+          <div>
+            {reChildren}
+          </div>
+        </form>
         <button id="formputter-submit" className="formputter-submit" onClick={this.validate}>
           {submitText}
         </button>

@@ -2,7 +2,7 @@ import React, {  ReactElement } from 'react';
 import { PutterValidator } from './validator';
 
 interface IInputterProps {
-  type: 'text'|'check'|'select'|'radio'|'custom';
+  type: 'text'|'check'|'select'|'radio'|'custom'|'password';
   disabled?: boolean;
   value?: any;
   name?: string;
@@ -105,6 +105,13 @@ export class Inputter extends React.Component<IInputterProps, IInputterState> {
             {invalid && message}
           </div>
         );
+      case 'password': 
+          return (
+            <div className={containerClassName} id={id}>
+              <input onBlur={this.validate} ref={el => this.inputRef = el} className={className} id={id + '-inputter-input'} value={value} name={name} disabled={disabled} type='password' onChange={onChange} />
+              {invalid && message}
+            </div>
+          );
       default:
         return ('invalid input type')
     }

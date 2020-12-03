@@ -5,6 +5,7 @@
         "lastName": "Last name",
         "login": "Login",
         "email": "E-mail",
+        "password": "Password",
         "language": "Language",
         "createUser": "Create user",
         "confirm": {

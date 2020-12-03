@@ -5,6 +5,7 @@
         "lastName": "Apellido",
         "login": "Login",
         "email": "E-mail",
+        "password": "Contraseña",
         "language": "Lenguaje",
         "confirm": {
             "delete": "Está seguro de que desea eliminar al usuario {%name%}?"

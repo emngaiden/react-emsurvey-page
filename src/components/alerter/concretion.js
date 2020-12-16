@@ -94,8 +94,10 @@ function showAlert(alerter, message, timeout, clickFn, type, className) {
        setTimeout(() => {
         div.innerHTML = null;
         div.onclick = null;
-        // alerter.style.display = 'none';
-        // alerter.removeChild(div);
+        alerter.removeChild(div);
+        if(alerter.children.length < 1) {
+            alerter.style.display = 'none';
+        }
        }, 500)
     }, timeout);
 }

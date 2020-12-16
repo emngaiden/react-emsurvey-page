@@ -1,7 +1,8 @@
 import React from 'react';
 import * as StateDivComponent from 'src/components/state-div';
 import * as InputterComponent from 'src/components/inputter';
-
+import { Alerter } from 'src/components/alerter';
+import './style.css';
 interface ITestState {
     stateDivProps: StateDivComponent.IStateDivProps;
     inputterProps: InputterComponent.IInputterProps;
@@ -167,6 +168,24 @@ export default class Test extends React.Component<undefined, ITestState>{
     inputter_state_makeValid() {
         this.inputterRef.updater.enqueueSetState(this.inputterRef, {...this.inputterRef.state, invalid: false, message: undefined})
     }
+    alerter_show_warning() {
+        Alerter.warning('This is a warning', 5000, () => alert('Clicked on the warning'));
+    }
+    alerter_show_error() {
+        Alerter.error('This is a error', 5000, () => alert('Clicked on the error'));
+    }
+    alerter_show_info() {
+        Alerter.info('This is a info', 5000, () => alert('Clicked on the info'));
+    }
+    alerter_show_success() {
+        Alerter.success('This is a success', 5000, () => alert('Clicked on the success'));
+    }
+    alerter_show_neutral() {
+        Alerter.neutral('This is a neutral', 5000, () => alert('Clicked on the neutral'));
+    }
+    alerter_show_custom() {
+        Alerter.custom('custom-alert' ,'This is a custom', 5000, () => alert('Clicked on the custom'));
+    }
     //#endregion
 
     render(){
@@ -231,6 +250,34 @@ export default class Test extends React.Component<undefined, ITestState>{
                     </div>
                     
                     <InputterComponent.Inputter {...this.state.inputterProps} ref={el => this.inputterRef = el}/>
+                </div>
+
+                <div>
+                    <h2>
+                        Test Alerter
+                    </h2>
+                    <div>
+                        <button onClick={this.alerter_show_success}>
+                            show success
+                        </button>
+                        <button onClick={this.alerter_show_error}>
+                            show error
+                        </button>
+                        <button onClick={this.alerter_show_warning}>
+                            show warning
+                        </button>
+                        <button onClick={this.alerter_show_info}>
+                            show info
+                        </button>
+                        <button onClick={this.alerter_show_neutral}>
+                            show neutral
+                        </button>
+                        <button onClick={this.alerter_show_custom}>
+                            show custom
+                        </button>
+                    </div>
+                    
+                    {Alerter.isAlerterConfigured() ? 'Ready to use Alerter' : 'Alerter is not configured'}
                 </div>
             </div>
         );

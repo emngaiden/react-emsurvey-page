@@ -21,6 +21,7 @@ export default () => next => action => {
         const message = getErrorMessage(error.response.data);
         console.error(`Actual cause: ${message}`);
       }
+      console.error('Action:', action)
 
       return Promise.reject(error);
     });

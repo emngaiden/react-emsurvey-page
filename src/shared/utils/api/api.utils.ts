@@ -39,7 +39,7 @@ function buildData(u: string, e: IApiEndpoint, g: Object): ApiRequestData {
 };
 
 function buildUrl(u: string, e: IApiEndpoint, g: Object): string {
-    u = `${u}/${e.path}`;
+    u = `${u}${e.path}`;
     if(g === undefined) return u;
     if(typeof g !== 'object') return u;
     let paths = '';

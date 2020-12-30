@@ -45,3 +45,10 @@ export function custom(className: string, message = 'my alert', timeout = 4000, 
 export function isAlerterConfigured(): boolean {
     return concretion.isAlerterConfigured();
 }
+
+export const AlerterMiddleware = () => next => action => {
+    if(action.payload && action.payload.isAxiosError) {
+        error(action.payload.message)
+    }
+    next(action);
+}

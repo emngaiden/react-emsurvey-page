@@ -5,7 +5,7 @@
                 "url": "http://localhost:8080/api",
                 "endpoints": {
                     "createUser": {
-                        "path": "users",
+                        "path": "/users",
                         "args": [
                             {
                                 "name": "user",
@@ -15,11 +15,11 @@
                         "method": "post"
                     },
                     "getUsers": {
-                        "path": "users",
+                        "path": "/users",
                         "method": "get" 
                     },
                     "getUser": {
-                        "path": "users",
+                        "path": "/users",
                         "args": [
                             {
                                 "name": "id",
@@ -29,7 +29,7 @@
                         "method": "get"
                     },
                     "updateUser": {
-                        "path": "users",
+                        "path": "/users",
                         "args": [
                             {
                                 "name": "user",
@@ -39,7 +39,7 @@
                         "method": "put"
                     },
                     "deleteUser": {
-                        "path": "users/delete",
+                        "path": "/users/delete",
                         "args": [
                             {
                                 "name": "id",

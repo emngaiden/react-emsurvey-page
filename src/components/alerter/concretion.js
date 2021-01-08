@@ -103,5 +103,6 @@ function showAlert(alerter, message, timeout, clickFn, type, className) {
 }
 
 function getAlerterDiv() {
-    return document.getElementById('alerter-container');
+    const comp = document.getElementById('alerter-container');
+    return comp !== undefined && comp !== null ? comp : undefined;
 }

@@ -276,8 +276,6 @@ export default class Test extends React.Component<undefined, ITestState>{
                             show custom
                         </button>
                     </div>
-                    
-                    {Alerter.isAlerterConfigured() ? 'Ready to use Alerter' : 'Alerter is not configured'}
                 </div>
             </div>
         );

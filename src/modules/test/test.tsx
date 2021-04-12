@@ -3,6 +3,8 @@ import * as StateDivComponent from 'src/components/state-div';
 import * as InputterComponent from 'src/components/inputter';
 import { Alerter } from 'src/components/alerter';
 import './style.css';
+import { ImageGrid } from 'src/components/image-grid';
+import * as constants from './test.constants';
 interface ITestState {
     stateDivProps: StateDivComponent.IStateDivProps;
     inputterProps: InputterComponent.IInputterProps;
@@ -276,6 +278,12 @@ export default class Test extends React.Component<undefined, ITestState>{
                             show custom
                         </button>
                     </div>
+                </div>
+                <div>
+                    <h2>
+                        Image Grid
+                    </h2>
+                    <ImageGrid disableContextMenu disableDrag preload imagesSrc={constants.images} padding={0.5} radius={20} />
                 </div>
             </div>
         );

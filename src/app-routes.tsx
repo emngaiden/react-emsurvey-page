@@ -8,6 +8,7 @@ import ErrorCatchingRoute from 'src/config/error/error-catching-route';
 import Start from 'src/modules/start/start';
 import Users from 'src/modules/users';
 import Test from 'src/modules/test/test';
+import Login from 'src/modules/login/login';
 
 // Another functional component? in my code?!
 const Routes = () => (
@@ -16,6 +17,7 @@ const Routes = () => (
       {/* Translation: "Router, if my url matches the path of this route, please render this component." */}
       <ErrorCatchingRoute path="/users" component={Users} />
       <ErrorCatchingRoute path="/test" component={Test} />
+      <ErrorCatchingRoute path="/login" component={Login} />
       <ErrorCatchingRoute path="/" component={Start} />
       <ErrorCatchingRoute component={Start} />
     </Switch>

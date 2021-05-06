@@ -6,4 +6,5 @@ export interface IUser{
     login?: string;
     email?: string;
     langKey?: string;
+    permisions?: string[];
 }

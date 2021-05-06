@@ -1,0 +1,7 @@
+{
+    "error": {
+        "http": {
+            "403": "No está autorizado para acceder a esta página"
+        } 
+    }
+}

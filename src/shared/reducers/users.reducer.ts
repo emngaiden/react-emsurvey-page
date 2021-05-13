@@ -121,7 +121,7 @@ export const getAllUsers = () => ({
 export const createUser = (user: IUser) => async dispatch => {
     await dispatch({
         type: ACTION_TYPES.CREATE_USER,
-        payload: sendRequest('main', 'createUser', { user: cleanEntity(user) })
+        payload: sendRequest('main', 'register', { user: cleanEntity(user) })
     });
     dispatch(getAllUsers());
 };

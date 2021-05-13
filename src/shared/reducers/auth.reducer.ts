@@ -1,6 +1,8 @@
 import { sendRequest } from 'src/shared/utils/api';
 import { IUser } from 'src/shared/model/user.model';
 import { FAILURE, REQUEST, SUCCESS } from './action-type.utils';
+import { cleanEntity } from 'src/shared/utils/app/entity.utils';
+import { ILoginDTO } from 'src/shared/model/dto/login.dto';
 
 const initialState = {
     sessionFetched: false,
@@ -31,7 +33,7 @@ export default (state: AuthState = initialState, action): AuthState => {
                 ...initialState,
                 loading: true,
             }
-        case FAILURE(ACTION_TYPES.LOGOUT):
+        case FAILURE(ACTION_TYPES.LOGIN):
             return {
                 ...initialState,
                 errorMessage: action.payload,
@@ -43,10 +45,20 @@ export default (state: AuthState = initialState, action): AuthState => {
                 loading: false,
                 loginError: false,
                 loginSuccess: true,
-                isAuthenticated: true
+                isAuthenticated: true,
+                JWTToken: action.payload.data.id_token
             };
         case ACTION_TYPES.LOGOUT:
             return initialState;
         default: return state;
     }
+}
+
+export const login = (login: ILoginDTO) => async dispatch => {
+    // TODO: make dispatch work with await
+    // TODO: storage implementation
+    dispatch({
+        type: ACTION_TYPES.LOGIN,
+        payload: sendRequest('main', 'login', {dto: cleanEntity(login)})
+    });
 }

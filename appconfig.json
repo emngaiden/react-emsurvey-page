@@ -2,13 +2,23 @@
     "apiSettings":{
         "api": {
             "main": {
-                "url": "http://localhost:8080/api",
+                "url": "http://localhost:8090/api",
                 "endpoints": {
-                    "createUser": {
-                        "path": "/users",
+                    "register": {
+                        "path": "/auth/register",
                         "args": [
                             {
-                                "name": "user",
+                                "name": "dto",
+                                "asBody": true
+                            }
+                        ],
+                        "method": "post"
+                    },
+                    "login": {
+                        "path": "/auth/authenticate",
+                        "args": [
+                            {
+                                "name": "dto",
                                 "asBody": true
                             }
                         ],

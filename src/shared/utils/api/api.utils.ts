@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { getApiData } from 'src/shared/utils/app';
 import { IApi, getEndpoint } from 'src/shared/model/system/api.model';
 import { IApiEndpoint } from 'src/shared/model/system/api-endpoint.model';
 
-export const sendRequest = (an: string, en: string, g?: any): Promise<any> => {
+export const sendRequest = (an: string, en: string, g?: any): Promise<AxiosResponse<any>> => {
     const a: IApi = getApiData(an);
     if(a === undefined) throw Error('No API with name "' + an + '" found. Was it added to appconfig.apiSettings.api?');
     const e: IApiEndpoint = getEndpoint(a, en);

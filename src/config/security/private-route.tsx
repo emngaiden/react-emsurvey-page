@@ -6,16 +6,16 @@ import ErrorBoundary from 'src/config/error/error-boundary';
 import { translate } from 'src/shared/utils/translation';
 
 interface IProps extends RouteProps {
-    permisions?: any[];
+    permissions?: any[];
 }
 
 interface IPrivateRouteProps extends IProps, StateProps{}
 
-export const PrivateRoute = ({
+export const PrivateRouteComponent = ({
     component: Component,
-    permisions = [],
     isAuthenticated,
     isAuthorized,
+    permissions = [],
     ...rest
 }: IPrivateRouteProps) => {
     const checkAuthorities = props => 
@@ -44,7 +44,11 @@ export const PrivateRoute = ({
     return <Route {...rest} render={renderRedirect} />;
 }
 
-const checkAuthorization = (authorities, authToCheck) => {
+const checkAuthorization = (user, authToCheck) => {
+    if (!user) {
+        return false;
+    }
+    const authorities = user.permissions;
     if (authorities && authorities.length > 0) {
         if (authToCheck.length === 0) {
             return true;
@@ -54,16 +58,18 @@ const checkAuthorization = (authorities, authToCheck) => {
     return false;
 } 
 
-const mapStateToProps = ({ auth }: IRootState, { permisions = [] }: IProps) => ({
+const mapStateToProps = ({ auth }: IRootState, { permissions: permisions = [] }: IProps) => ({
     isAuthenticated: auth.isAuthenticated,
-    isAuthorized: checkAuthorization(auth.user.permisions, permisions) 
+    isAuthorized: checkAuthorization(auth.user, permisions) 
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 
-export default connect(
+export const PrivateRoute = connect<StateProps, undefined, IProps>(
     mapStateToProps,
     null,
     null,
     {pure: false}
-)(PrivateRoute)
+)(PrivateRouteComponent);
+
+export default PrivateRoute;

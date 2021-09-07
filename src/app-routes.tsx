@@ -9,13 +9,15 @@ import Start from 'src/modules/start/start';
 import Users from 'src/modules/users';
 import Test from 'src/modules/test/test';
 import Login from 'src/modules/login/login';
+import { PrivateRoute } from 'src/config/security/private-route';
+import { AUTHORITIES } from 'src/config/constants';
 
 // Another functional component? in my code?!
 const Routes = () => (
   <div className="view-routes">
     <Switch>
       {/* Translation: "Router, if my url matches the path of this route, please render this component." */}
-      <ErrorCatchingRoute path="/users" component={Users} />
+      <PrivateRoute path="/users" component={Users} permissions={[AUTHORITIES.user]}/>
       <ErrorCatchingRoute path="/test" component={Test} />
       <ErrorCatchingRoute path="/login" component={Login} />
       <ErrorCatchingRoute path="/" component={Start} />

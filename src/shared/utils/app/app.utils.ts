@@ -1,6 +1,13 @@
-export function isPromise(p) {
+/*export function isPromise(p) {
     return p && Object.prototype.toString.call(p) === "[object Promise]";
-}
+}*/
+
+export function isPromise(value) {
+    if (value !== null && typeof value === 'object') {
+        return value && typeof value.then === 'function';
+    }
+    return false;
+};
 
 export function verifyArray(d: Array<any>): boolean {
     return verifyObject(d) && d.length > 0;

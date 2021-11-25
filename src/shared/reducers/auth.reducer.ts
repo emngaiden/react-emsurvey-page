@@ -54,11 +54,11 @@ export default (state: AuthState = initialState, action): AuthState => {
     }
 }
 
+
 export const login = (login: ILoginDTO) => async dispatch => {
-    // TODO: make dispatch work with await
-    // TODO: storage implementation
-    dispatch({
+    const r = await dispatch({
         type: ACTION_TYPES.LOGIN,
         payload: sendRequest('main', 'login', {dto: cleanEntity(login)})
     });
+    const d = "hello";
 }

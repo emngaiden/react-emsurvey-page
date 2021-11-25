@@ -13,7 +13,7 @@ class Login extends React.Component<LoginProps>{
 
     constructor(props) {
         super(props);
-
+        this.sendLoginInfo = this.sendLoginInfo.bind(this);
     }
 
     sendLoginInfo(data: ILoginDTO, event) {
@@ -22,7 +22,7 @@ class Login extends React.Component<LoginProps>{
 
     render() {
         return (
-            <LoginDataForm onSubmit={this.props.login} isAuthenticated={this.props.isAuthenticated} />
+            <LoginDataForm onSubmit={this.sendLoginInfo} isAuthenticated={this.props.isAuthenticated} />
         );
     }
 }
